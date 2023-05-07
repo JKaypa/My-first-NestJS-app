@@ -1,4 +1,4 @@
-enum TaskStatus {
+export enum TaskStatus {
     PENDING = 'PENDING',
     IN_PROGRESS = 'IN_PROGRESS',
     DONE = 'DONE'
@@ -11,4 +11,4 @@ export class Task {
     status: TaskStatus;
 }
 
-const task = new Task();
+

@@ -1,6 +1,6 @@
-class CreateTaskDto {
-  constructor(public name: string){
-    this.name = name
-  }
+export class CreateTaskDto {
+ title: string
+ description: string 
 }
-const newTask = new CreateTaskDto('Joel')
+
+
