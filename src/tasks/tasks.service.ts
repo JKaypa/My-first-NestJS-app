@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus } from './task.entity';
-import { CreateTaskDto } from './dto/task.dto';
+import { CreateTaskDto, dataToUpdateDto } from './dto/task.dto';
 
 @Injectable()
 export class TasksService {
@@ -29,14 +29,21 @@ export class TasksService {
     return newtask;
   }
 
-  updateTask() {}
+  updateTask(id: string, dataToUpdate: dataToUpdateDto) {
+    const taskFound: Task = this.tasks.find((task) => task.id === +id);
+    if (!taskFound) return 'That task was not found';
+    const dataUpdated: Task = Object.assign(taskFound, dataToUpdate);
+    this.tasks = this.tasks.map((task) =>
+      task.id === +id ? dataUpdated : task,
+    );
+    return dataUpdated;
+  }
 
   deleteTask(id: string) {
-    // const taskToBeDeleted: Task = this.tasks.find((task) => task.id);
-    const idNum = Number(id)
+    const idNum = Number(id);
     this.tasks = this.tasks.filter((task) => task.id !== idNum);
     console.log(this.tasks);
-    
+
     return `The task has been deleted succesfully`;
   }
 }
